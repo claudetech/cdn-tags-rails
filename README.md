@@ -1,10 +1,12 @@
-# CdnTags [![Build Status][travis-img]][travis-link] [![Coverage Status][coveralls-img]][coveralls-link]
+# CdnTags [![Build Status][travis-img]][travis-link] [![Coverage Status][coveralls-img]][coveralls-link] [![Gem Version][gem-img]][gem-link]
 
 
 Using a CDN in development is kind of painful when the 
 network is unstable, however in production common libraries
 should generally be served via a CDN.
 This gem helps to automatize this process.
+
+This gem has been tested with Rails 3 and 4, and Ruby 1.9, 2.0 and 2.1.
 
 ## Installation
 
@@ -92,3 +94,5 @@ This will result in the following HTML output.
 [travis-img]: https://travis-ci.org/claude-tech/cdn-tags-rails.svg?branch=master
 [coveralls-link]: https://coveralls.io/r/claude-tech/cdn-tags-rails?branch=master
 [coveralls-img]: https://img.shields.io/coveralls/claude-tech/cdn-tags-rails.svg
+[gem-link]: http://badge.fury.io/rb/cdn_tags
+[gem-img]: https://badge.fury.io/rb/cdn_tags.svg
