@@ -21,12 +21,17 @@ Create config/initializers/cdn_tags.rb and configure your assets.
 
 ```ruby
 CdnTags.configure do |c|
-  c.urls = {
+  c.scripts_urls = {
     '/path/to/jquery' => '//code.jquery.com/jquery-2.1.1.min.js',
+  }
+  c.stylesheets_urls = {
     '/path/to/bootstrap' => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
   }
 end
 ```
+
+This will automatically add the files to `Rails.application.config.assets.precompile`. If you want to disable this behavior, you can set
+`add_to_precompile` to `false` in the configuration.
 
 ## Usage
 

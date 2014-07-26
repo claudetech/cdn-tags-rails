@@ -9,6 +9,7 @@ module CdnTags
 
   def self.configure
     yield self.configuration
+    self.configuration.update_rails_precompile!
   end
 
   def self.included(base)

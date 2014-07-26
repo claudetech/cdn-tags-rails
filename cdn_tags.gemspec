@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "nokogiri", "~> 1.6"
   s.add_development_dependency "jazz_hands", "~> 0.5"
 
-  s.add_dependency "rails", "~> 4.1"
+  s.add_dependency "rails", ">= 3.0"
 end

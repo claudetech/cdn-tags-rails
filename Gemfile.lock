@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    cdn_tags (0.1.0)
-      rails (~> 4.1.4)
+    cdn_tags (0.2.0)
+      rails (>= 3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -161,6 +161,6 @@ PLATFORMS
 
 DEPENDENCIES
   cdn_tags!
-  jazz_hands (~> 0.5.2)
-  nokogiri (~> 1.6.3.1)
-  rspec (~> 3.0.0)
+  jazz_hands (~> 0.5)
+  nokogiri (~> 1.6)
+  rspec (~> 3.0)

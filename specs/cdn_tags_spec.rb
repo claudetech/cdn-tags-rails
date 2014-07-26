@@ -14,14 +14,35 @@ end
 describe CdnTags do
   describe CdnTags::Configuration do
     it 'should have default values' do
-      expect(CdnTags.configuration.urls).to eq({})
+      expect(CdnTags.configuration.stylesheets_urls).to eq({})
+      expect(CdnTags.configuration.scripts_urls).to eq({})
     end
 
     it 'should bet settable' do
       CdnTags.configure do |c|
-        c.urls["foo"] = "bar"
+        c.scripts_urls["foo"] = "bar"
       end
-      expect(CdnTags.configuration.urls["foo"]).to eq("bar")
+      expect(CdnTags.configuration.scripts_urls["foo"]).to eq("bar")
+    end
+
+    it 'should update Rails assets precompile' do
+      expect(Rails.application.config.assets.precompile).not_to include('jquery.js')
+      expect(Rails.application.config.assets.precompile).not_to include('bootstrap.css')
+      CdnTags.configure do |c|
+        c.scripts_urls["jquery"] = "foobar"
+        c.stylesheets_urls["bootstrap"] = "foobar"
+      end
+      expect(Rails.application.config.assets.precompile).to include('jquery.js')
+      expect(Rails.application.config.assets.precompile).to include('bootstrap.css')
+    end
+
+    it 'should not update Rails assets precompile if disabled' do
+      expect(Rails.application.config.assets.precompile).not_to include('angular.js')
+      CdnTags.configure do |c|
+        c.scripts_urls["angular"] = "foobar"
+        c.add_to_precompile = false
+      end
+      expect(Rails.application.config.assets.precompile).not_to include('angular.js')
     end
   end
 
@@ -31,8 +52,10 @@ describe CdnTags do
 
     before(:each) do
       CdnTags.configure do |c|
-        c.urls = {
+        c.scripts_urls = {
           'jquery' => '//code.jquery.com/jquery-2.1.1.min.js',
+        }
+        c.stylesheets_urls = {
           'bootstrap' => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
         }
         c.raise_on_missing = false
@@ -44,13 +67,15 @@ describe CdnTags do
         method: 'javascript_cdn_include_tag',
         path_helper: 'javascript_path',
         extracter: 'script_src',
-        asset: 'jquery'
+        asset: 'jquery',
+        config_key: 'scripts_urls'
       },
       {
         method: 'stylesheet_cdn_link_tag',
         path_helper: 'stylesheet_path',
         extracter: 'link_href',
-        asset: 'bootstrap'
+        asset: 'bootstrap',
+        config_key: 'stylesheets_urls'
       }
     ]
 
@@ -68,7 +93,8 @@ describe CdnTags do
         it 'should replace sources in production' do
           CdnTags.configuration.environment = "production"
           tag = view.send(t[:method], t[:asset])
-          expected = CdnTags.configuration.urls[t[:asset]]
+          urls = CdnTags.configuration.send(t[:config_key])
+          expected = urls[t[:asset]]
           expect(send(t[:extracter], tag)).to eq(expected)
         end
 
