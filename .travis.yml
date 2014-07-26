@@ -1,7 +1,11 @@
 language: ruby
 cache: bundler
 rvm:
-  - 1.9.3-p484
-  - 2.0.0-p353
-  - 2.1.0
-  - 2.1.2
+- 1.9.3-p484
+- 2.0.0-p353
+- 2.1.0
+- 2.1.2
+notifications:
+  email: false
+  slack:
+    secure: dWunGMhRwSmsVhc/wJD0EDVH/PTLtzb1G+ZExj28gWCdZ7ojTgrFDUiAAqxli/FrtpQTUsX8K7eYjlQLPc5vmNCdUes8537r8vmPz7p6m97A5rehBsIWfgYZNKKA3hxvWAoCryOdUwbUsihSmpTmQTfRSH4SZfOmRPuRzzmrVFA=
