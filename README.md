@@ -58,3 +58,17 @@ becomes
 <%= javascript_cdn_include_tag '/path/to/jquery' %>
 <%= stylesheet_cdn_link_tag '/path/to/bootstrap' %>
 ```
+
+This will result in the following HTML output.
+
+* In development and test environments:
+
+```html
+<script src="/assets/jquery-1.9.1.js?body=1"></script>
+```
+
+* In production environment:
+
+```html
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+```
