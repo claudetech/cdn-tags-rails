@@ -18,6 +18,13 @@ to your Gemfile.
 ## Configuration
 
 Create config/initializers/cdn_tags.rb and configure your assets.
+You can generate it by using
+
+```
+rails generate cdn_tags:install
+```
+
+Here is a sample configuration.
 
 ```ruby
 CdnTags.configure do |c|
