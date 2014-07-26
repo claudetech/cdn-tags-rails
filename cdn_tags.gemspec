@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "nokogiri", "~> 1.6"
 
-  #s.add_dependency "rails", ">= 3.0"
+  s.add_dependency "rails", ">= 3.0"
 end
