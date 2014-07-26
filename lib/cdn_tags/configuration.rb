@@ -15,10 +15,16 @@ module CdnTags
 
     def update_rails_precompile!
       return unless self.add_to_precompile
-      scripts_precompile = self.scripts_urls.keys.map { |s| File.extname(s) == '' ? "#{s}.js" : s }
-      stylesheets_precompile = self.stylesheets_urls.keys.map { |s| File.extname(s) == '' ? "#{s}.css" : s }
+      scripts_precompile = self.scripts_urls.keys.map { |s| should_append_extension(s) ? "#{s}.js" : s }
+      stylesheets_precompile = self.stylesheets_urls.keys.map { |s| should_append_extension(s) ? "#{s}.css" : s }
       added_precompile = scripts_precompile + stylesheets_precompile
       Rails.application.config.assets.precompile += added_precompile
+    end
+
+    private
+    def should_append_extension(filename)
+      extname = File.extname(filename)
+      extname.empty? or /[0-9]+/.match extname[1..-1]
     end
   end
 end

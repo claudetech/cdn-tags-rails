@@ -26,13 +26,13 @@ describe CdnTags do
     end
 
     it 'should update Rails assets precompile' do
-      expect(Rails.application.config.assets.precompile).not_to include('jquery.js')
+      expect(Rails.application.config.assets.precompile).not_to include('jquery-1.9.1.js')
       expect(Rails.application.config.assets.precompile).not_to include('bootstrap.css')
       CdnTags.configure do |c|
-        c.scripts_urls["jquery"] = "foobar"
+        c.scripts_urls["jquery-1.9.1"] = "foobar"
         c.stylesheets_urls["bootstrap"] = "foobar"
       end
-      expect(Rails.application.config.assets.precompile).to include('jquery.js')
+      expect(Rails.application.config.assets.precompile).to include('jquery-1.9.1.js')
       expect(Rails.application.config.assets.precompile).to include('bootstrap.css')
     end
 
