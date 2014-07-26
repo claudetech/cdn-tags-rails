@@ -14,7 +14,12 @@ Add
 gem 'cdn_tags'
 ```
 
-to your Gemfile.
+to your Gemfile and run 
+
+```
+bundle install
+```
+
 
 ## Configuration
 
