@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Daniel Perez"]
   s.email       = ["tuvistavie@gmail.com"]
   s.homepage    = "https://github.com/claude-tech/cdn-tags-rails"
-  s.summary     = "Helpers to use CDN scripts in Rails production."
+  s.summary     = "Helpers to serve assets via CDN in Rails."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
