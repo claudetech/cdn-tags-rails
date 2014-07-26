@@ -1,4 +1,5 @@
-# CdnTags
+# CdnTags [![Build Status][travis-img]][travis-link] [![Coverage Status][coveralls-img]][coveralls-link]
+
 
 Using a CDN in development is kind of painful when the 
 network is unstable, however in production common libraries
@@ -72,3 +73,9 @@ This will result in the following HTML output.
 ```html
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 ```
+
+
+[travis-link]: https://travis-ci.org/claude-tech/cdn-tags-rails
+[travis-img]: https://travis-ci.org/claude-tech/cdn-tags-rails.svg?branch=master
+[coveralls-link]: https://coveralls.io/r/claude-tech/cdn-tags-rails?branch=master
+[coveralls-img]: https://img.shields.io/coveralls/claude-tech/cdn-tags-rails.svg
