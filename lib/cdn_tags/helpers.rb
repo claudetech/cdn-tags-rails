@@ -17,7 +17,7 @@ module CdnTags
 
   def self.map_sources(sources, config_key)
     config = CdnTags.configuration
-    return sources unless config.environment.to_sym == :production
+    return sources unless config.cdn_environments.include? config.environment.to_sym
     sources.map do |s|
       src = config.send(config_key)[s]
       if src.nil?

@@ -46,6 +46,14 @@ end
 This will automatically add the files to `Rails.application.config.assets.precompile`. If you want to disable this behavior, you can set
 `add_to_precompile` to `false` in the configuration.
 
+### Configuration items
+
+* `scripts_urls` (`Hash`, default: `{}`): The scripts that should be served from a CDN.
+* `stylesheets_urls` (`Hash`, default: `{}`): The stylesheets that should be served from a CDN.
+* `add_to_precompile` (`true`|`false`, default: `true`): Automatically add scripts to `Rails.application.config.assets` or not.
+* `raise_on_missing` (`true`|`false`, default: `false`): Raise an exception or not if the asset used with CDN helper is not defined in `scripts_urls` or `stylesheets_urls`.
+* `cdn_environments` (`Array`, default: `[:production]`): The environments in which CDN should be used instead of normal asset.
+
 ## Usage
 
 Just replace `javascript_include_tag` and `stylesheet_link_tag`

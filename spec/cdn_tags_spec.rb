@@ -59,6 +59,7 @@ describe CdnTags do
           'bootstrap' => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
         }
         c.raise_on_missing = false
+        c.cdn_environments = [:production]
       end
     end
 
@@ -92,6 +93,17 @@ describe CdnTags do
 
         it 'should replace sources in production' do
           CdnTags.configuration.environment = "production"
+          tag = view.send(t[:method], t[:asset])
+          urls = CdnTags.configuration.send(t[:config_key])
+          expected = urls[t[:asset]]
+          expect(send(t[:extracter], tag)).to eq(expected)
+        end
+
+        it 'should replace sources in added environments' do
+          CdnTags.configure do |c|
+            c.cdn_environments << "staging"
+          end
+          CdnTags.configuration.environment = "staging"
           tag = view.send(t[:method], t[:asset])
           urls = CdnTags.configuration.send(t[:config_key])
           expected = urls[t[:asset]]

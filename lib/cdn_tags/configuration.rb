@@ -3,7 +3,7 @@ require 'rails'
 module CdnTags
   class Configuration
     attr_accessor :scripts_urls, :stylesheets_urls, :environment
-    attr_accessor :raise_on_missing, :add_to_precompile
+    attr_accessor :raise_on_missing, :add_to_precompile, :cdn_environments
 
     def initialize
       self.scripts_urls = {}
@@ -11,6 +11,16 @@ module CdnTags
       self.environment = Rails.env
       self.raise_on_missing = false
       self.add_to_precompile = true
+      self.cdn_environments = [:production]
+    end
+
+    def post_configure_hooks
+      self.update_rails_precompile!
+      self.fix_cdn_environments_keys!
+    end
+
+    def fix_cdn_environments_keys!
+      self.cdn_environments.map! { |s| s.to_sym }
     end
 
     def update_rails_precompile!

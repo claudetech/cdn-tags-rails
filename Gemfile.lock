@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cdn_tags (0.3.2)
+    cdn_tags (0.4.0)
       rails (>= 3.0)
 
 GEM
