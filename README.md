@@ -90,8 +90,8 @@ This will result in the following HTML output.
 ```
 
 
-[travis-link]: https://travis-ci.org/claude-tech/cdn-tags-rails
-[travis-img]: https://travis-ci.org/claude-tech/cdn-tags-rails.svg?branch=master
+[travis-link]: https://travis-ci.org/claudetech/cdn-tags-rails
+[travis-img]: https://travis-ci.org/claudetech/cdn-tags-rails.svg?branch=master
 [coveralls-link]: https://coveralls.io/r/claude-tech/cdn-tags-rails?branch=master
 [coveralls-img]: https://img.shields.io/coveralls/claude-tech/cdn-tags-rails.svg
 [gem-link]: http://badge.fury.io/rb/cdn_tags
