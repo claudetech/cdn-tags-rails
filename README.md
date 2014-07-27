@@ -53,7 +53,7 @@ This will automatically add the files to `Rails.application.config.assets.precom
 * `scripts_urls` (`Hash`, default: `{}`): The scripts that should be served from a CDN.
 * `stylesheets_urls` (`Hash`, default: `{}`): The stylesheets that should be served from a CDN.
 * `add_to_precompile` (`true`|`false`, default: `true`): Automatically add assets to `Rails.application.config.assets` or not.
-* `raise_on_missing` (`true`|`false`, default: `false`): Raise an exception or not if the asset used with CDN helper is not defined in `scripts_urls` or `stylesheets_urls`.
+* `raise_on_missing` (`true`|`false`|`Array`, default: `false`): Raise an exception or not if the asset used with CDN helper is not defined in `scripts_urls` or `stylesheets_urls`. If an array is given, an exception will be set if the current environment is in this array.
 * `cdn_environments` (`Array`, default: `[:production]`): The environments in which CDN should be used instead of normal asset.
 
 ## Usage

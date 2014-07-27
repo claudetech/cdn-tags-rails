@@ -17,15 +17,19 @@ module CdnTags
 
   def self.map_sources(sources, config_key)
     config = CdnTags.configuration
-    return sources unless config.cdn_environments.include? config.environment.to_sym
+    do_replace = config.cdn_environments.include? config.environment.to_sym
+    return sources unless do_replace || config.should_raise
     sources.map do |s|
       src = config.send(config_key)[s]
       if src.nil?
-        raise CdnTags::Error.new(config), "#{s} is not defined. Check CdnTags configuration." if config.raise_on_missing
+        raise CdnTags::Error.new(config), "#{s} is not defined. Check CdnTags configuration." if config.should_raise
         s
       else
-        src
+        do_replace ? src : s
       end
     end
+  end
+
+  def maybe_raise(src, config_key)
   end
 end

@@ -44,6 +44,27 @@ describe CdnTags do
       end
       expect(Rails.application.config.assets.precompile).not_to include('angular.js')
     end
+
+    describe '#should_raise' do
+      it 'should work with booleans' do
+        CdnTags.configure { |c| c.raise_on_missing = false }
+        expect(CdnTags.configuration.should_raise).to be false
+        CdnTags.configure { |c| c.raise_on_missing = true }
+        expect(CdnTags.configuration.should_raise).to be true
+      end
+
+      it 'should work with arrays' do
+        CdnTags.configure do |c|
+          c.environment = :development
+          c.raise_on_missing = [:development, :test]
+        end
+        expect(CdnTags.configuration.should_raise).to be true
+        CdnTags.configure do |c|
+          c.environment = :production
+        end
+        expect(CdnTags.configuration.should_raise).to be false
+      end
+    end
   end
 
   describe CdnTags::Helpers do
@@ -91,6 +112,16 @@ describe CdnTags do
           expect(send(t[:extracter], tag)).to eq(expected)
         end
 
+        it 'should not replace in dev when configured to raise' do
+          CdnTags.configure do |c|
+            c.raise_on_missing = [:development]
+            c.environment = "development"
+          end
+          tag = view.send(t[:method], t[:asset])
+          expected = view.send(t[:path_helper], t[:asset])
+          expect(send(t[:extracter], tag)).to eq(expected)
+        end
+
         it 'should replace sources in production' do
           CdnTags.configuration.environment = "production"
           tag = view.send(t[:method], t[:asset])
@@ -102,8 +133,8 @@ describe CdnTags do
         it 'should replace sources in added environments' do
           CdnTags.configure do |c|
             c.cdn_environments << "staging"
+            c.environment = "staging"
           end
-          CdnTags.configuration.environment = "staging"
           tag = view.send(t[:method], t[:asset])
           urls = CdnTags.configuration.send(t[:config_key])
           expected = urls[t[:asset]]
@@ -117,11 +148,19 @@ describe CdnTags do
           expect(send(t[:extracter], tag)).to eq(expected)
         end
 
-        it 'should raise error when configured' do
+        it 'should raise error when raise_on_missing is true' do
           CdnTags.configure do |c|
             c.raise_on_missing = true
+            c.environment = "production"
           end
-          CdnTags.configuration.environment = "production"
+          expect { view.send(t[:method], "foo") }.to raise_error(CdnTags::Error)
+        end
+
+        it 'should raise error when env is in raise_on_missing' do
+          CdnTags.configure do |c|
+            c.raise_on_missing = [:development, :test]
+            c.environment = "development"
+          end
           expect { view.send(t[:method], "foo") }.to raise_error(CdnTags::Error)
         end
       end

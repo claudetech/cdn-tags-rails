@@ -10,7 +10,10 @@ CdnTags.configure do |c|
   }
 
   # Set to true to raise an exception if the demanded
-  # asset is not defined above
+  # asset is not defined above. The following values are possible.
+  # true: will always raise when not found
+  # false: will never raise
+  # Array: will raise if the current environment is in this array
   # c.raise_on_missing = false
 
   # Set to false to avoid adding the above assets

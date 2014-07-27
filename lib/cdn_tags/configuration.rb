@@ -4,6 +4,7 @@ module CdnTags
   class Configuration
     attr_accessor :scripts_urls, :stylesheets_urls, :environment
     attr_accessor :raise_on_missing, :add_to_precompile, :cdn_environments
+    attr_reader :should_raise
 
     def initialize
       self.scripts_urls = {}
@@ -15,12 +16,24 @@ module CdnTags
     end
 
     def post_configure_hooks
-      self.update_rails_precompile!
-      self.fix_cdn_environments_keys!
+      update_rails_precompile!
+      fix_keys!
+      set_should_raise!
     end
 
-    def fix_cdn_environments_keys!
+    private
+    def set_should_raise!
+      if self.raise_on_missing == !!self.raise_on_missing
+        @should_raise = self.raise_on_missing
+      else
+        self.raise_on_missing.map! { |s| s.to_sym }
+        @should_raise = self.raise_on_missing.include? self.environment
+      end
+    end
+
+    def fix_keys!
       self.cdn_environments.map! { |s| s.to_sym }
+      self.environment = self.environment.to_sym
     end
 
     def update_rails_precompile!
@@ -31,7 +44,6 @@ module CdnTags
       Rails.application.config.assets.precompile += added_precompile
     end
 
-    private
     def should_append_extension(filename)
       extname = File.extname(filename)
       extname.empty? or /[0-9]+/.match extname[1..-1]
