@@ -1,4 +1,4 @@
-# CdnTags [![Build Status][travis-img]][travis-link] [![Coverage Status][coveralls-img]][coveralls-link] [![Gem Version][gem-img]][gem-link]
+# CdnTags [![Build Status][travis-img]][travis-link] [![Coverage Status][coveralls-img]][coveralls-link] [![Code Climate][code-climate-img]][code-climate-link] [![Gem Version][gem-img]][gem-link]
 
 
 Using a CDN in development is kind of painful when the 
@@ -96,3 +96,5 @@ This will result in the following HTML output.
 [coveralls-img]: https://img.shields.io/coveralls/claude-tech/cdn-tags-rails.svg
 [gem-link]: http://badge.fury.io/rb/cdn_tags
 [gem-img]: https://badge.fury.io/rb/cdn_tags.svg
+[code-climate-img]: https://codeclimate.com/github/claudetech/cdn-tags-rails.png
+[code-climate-link]: https://codeclimate.com/github/claudetech/cdn-tags-rails
